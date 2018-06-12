@@ -1,0 +1,32 @@
+<zk>
+	<?page title="Login" contentType="text/html;charset=utf-8"?>
+	<window apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm')@init('com.hieu.zk_example.MyViewModel')"
+		validationMessages="@id('vmsgs')" width="600px" vflex="1">
+		<label value="Phân loại: " class="boxlabel" />
+		<combobox id="cmbSize" width="150px"
+			model="@load(vm.logListModel)" selectedItem="@bind(vm.select)">
+			<template name="model">
+				<comboitem label="@load(each.name)" />
+			</template>
+		</combobox>
+		<hbox align="center">
+			Keyword:
+			<textbox value="@bind(vm.keyword)" />
+			<button label="Search" image="/widgets/getting_started/img/search.png" onClick="@command('search')" />
+			<button label="All" image="/widgets/getting_started/img/search.png" onClick="@command('searchAll')" />
+		</hbox>
+		
+		
+		<hbox style="margin-top:20px" visible="@bind(not empty vm.select">
+			<image src="@bind(vm.select.name)" style="padding:10px" />
+			<vbox>
+				<hlayout>
+					Model : <label value="@bind(vm.select.name)" style="font-weight:bold"/>
+				</hlayout>
+				
+			</vbox>
+		</hbox>
+	</window>
+	
+</zk>
